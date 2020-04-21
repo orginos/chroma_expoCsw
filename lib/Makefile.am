@@ -470,6 +470,7 @@ nobase_include_HEADERS += \
 	actions/ferm/fermacts/fermact_factory_w.h \
 	actions/ferm/fermacts/clover_fermact_params_w.h \
 	actions/ferm/fermacts/eoprec_clover_fermact_w.h \
+	actions/ferm/fermacts/eoprec_expo_clover_fermact_w.h \
 	actions/ferm/fermacts/seoprec_clover_fermact_w.h \
 	actions/ferm/fermacts/eoprec_clover_orbifold_fermact_w.h \
 	actions/ferm/fermacts/unprec_clover_fermact_w.h \
@@ -575,7 +576,10 @@ nobase_include_HEADERS += \
 	actions/ferm/linop/clover_term_w.h \
 	actions/ferm/linop/clover_term_base_w.h \
 	actions/ferm/linop/clover_term_qdp_w.h \
+	actions/ferm/linop/expo_clover_term_w.h \
+	actions/ferm/linop/expo_clover_term_qdp_w.h \
 	actions/ferm/linop/eoprec_clover_linop_w.h \
+	actions/ferm/linop/eoprec_expo_clover_linop_w.h \
 	actions/ferm/linop/seoprec_clover_linop_w.h \
 	actions/ferm/linop/shifted_linop_w.h \
 	actions/ferm/linop/eoprec_clover_dumb_linop_w.h \
@@ -1499,6 +1503,7 @@ libchroma_a_SOURCES += \
 	actions/ferm/fermacts/eoprec_ovext_fermact_array_w.cc \
 	actions/ferm/fermacts/clover_fermact_params_w.cc \
 	actions/ferm/fermacts/eoprec_clover_fermact_w.cc \
+	actions/ferm/fermacts/eoprec_expo_clover_fermact_w.cc \
 	actions/ferm/fermacts/seoprec_clover_fermact_w.cc \
 	actions/ferm/fermacts/eoprec_clover_orbifold_fermact_w.cc \
 	actions/ferm/fermacts/unprec_clover_fermact_w.cc \
@@ -1595,6 +1600,8 @@ libchroma_a_SOURCES += \
 	actions/ferm/linop/clover_term_base_w.cc \
 	actions/ferm/linop/clover_term_qdp_w.cc \
 	actions/ferm/linop/eoprec_clover_linop_w.cc \
+	actions/ferm/linop/expo_clover_term_qdp_w.cc \
+	actions/ferm/linop/eoprec_expo_clover_linop_w.cc \
 	actions/ferm/linop/seoprec_clover_linop_w.cc \
 	actions/ferm/linop/eoprec_clover_dumb_linop_w.cc \
 	actions/ferm/linop/eoprec_clover_orbifold_linop_w.cc \
