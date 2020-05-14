@@ -146,7 +146,7 @@ double tri6_trace(const Triang6& A){
 
 // Computes Tr(A*B) using hermiticity of the matrices
 double tri6_trace_mul(const Triang6& A, const Triang6& B){
-    double trd, tro;
+    double trd = 0, tro = 0;
     for (size_t i = 0; i < Ndiag; i++)
         trd += A.diag[i] * B.diag[i];
 
@@ -163,7 +163,7 @@ int main(){
     for (size_t i = 0; i < Ndiag; i++)
         A.diag[i] = 1.8 - i*0.1 - 1.55;    // this is just some test data...
     for (size_t i = 0; i < Noffd; i++)
-        A.offd[i] = std::complex<double>{ 1.2 - i*0.2, 1.2 - i*0.2 - 0.1 }; 
+        A.offd[i] = std::complex<double> { 1.2 - i*0.2, 1.2 - i*0.2 - 0.1 }; 
 
     // Define A^2 and A^3
     tri6_mult(A2, A, A);

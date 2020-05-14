@@ -75,7 +75,7 @@ def get_q(p, c, N):
                 q[k]=0.0
     return q
 
-N = 20
+N = 30
 c = get_c(N, 0)
 print('c = ', c)
 
@@ -94,7 +94,7 @@ A5 = np.linalg.matrix_power(A, 5)
 expA = q[0]*np.eye(6) + q[1]*A + q[2]*A2 + q[3]*A3 + q[4]*np.dot(A2, A2) + q[5]*np.dot(A2, A3) 
 for i in range(6):
     for j in range(6):
-        print("{:6.4g} + {:6.4g}i \t".format(expA[i, j].real, expA[i, j].imag ), end='')
+        print("{:10.8g} + {:10.8g}i \t".format(expA[i, j].real, expA[i, j].imag ), end='')
     print()
 
 print()
@@ -103,7 +103,7 @@ print()
 exact = expm(A)
 for i in range(6):
     for j in range(6):
-        print("{:6.4g} + {:6.4g}i \t".format(exact[i, j].real, exact[i, j].imag ), end='')
+        print("{:10.8g} + {:10.8g}i \t".format(exact[i, j].real, exact[i, j].imag ), end='')
     print()
 
 print(q)

@@ -12,6 +12,7 @@
 #include "actions/ferm/linop/clover_term_base_w.h"
 #include "meas/glue/mesfield.h"
 #include <array>
+#include <iomanip>
 #include <complex>
 namespace Chroma 
 { 
@@ -165,7 +166,7 @@ namespace Chroma
   // Computes Tr(A*B) using hermiticity of the matrices
   template<typename R>
   RScalar<R> tri6_trace_mul(const PrimitiveClovTriang<R>& A, const PrimitiveClovTriang<R>& B, int comp){
-    RScalar<R> trd, tro;
+    RScalar<R> trd = 0.0, tro = 0.0;
     for (size_t i = 0; i < 2*Nc; i++)
         trd += A.diag[comp][i] * B.diag[comp][i];
 
@@ -227,9 +228,10 @@ namespace Chroma
       else {
           QDPIO::cerr << "error" << std::endl;
       }
+
       // I*q0 + A*q1 + A^2*q2 + A^3*q3
       for (size_t i = 0; i < 2*Nc; i++)
-          A.diag[comp][i] = q[0] + A.diag[comp][i]*q[1] + A2.diag[comp][i]*q[1] + A3.diag[comp][i]*q[3];   
+          A.diag[comp][i] = q[0] + A.diag[comp][i]*q[1] + A2.diag[comp][i]*q[2] + A3.diag[comp][i]*q[3];   
       for (size_t i = 0; i < 2*Nc*Nc-Nc; i++)
           A.offd[comp][i] = A.offd[comp][i]*q[1] + A2.offd[comp][i]*q[2] + A3.offd[comp][i]*q[3];
 
@@ -634,13 +636,7 @@ namespace Chroma
       for(int site = lo; site < hi; ++site)  {
 	/*# Construct diagonal */
 	
-	for(int jj = 0; jj < 2; jj++) {
-	  
-	  for(int ii = 0; ii < 2*Nc; ii++) {
-	    
-	    tri[site].diag[jj][ii] = diag_mass.elem().elem().elem();
-	  }
-	}
+	
 	
        
 
@@ -658,22 +654,22 @@ namespace Chroma
 	  ctmp_0 = f5.elem(site).elem().elem(i,i);
 	  ctmp_0 -= f0.elem(site).elem().elem(i,i);
 	  rtmp_0 = imag(ctmp_0);
-	  tri[site].diag[0][i] += rtmp_0;
+	  tri[site].diag[0][i] = rtmp_0;
 	  
 	  /*# diag_L(i+Nc,0) = 1 + i*diag(E_z - B_z) */
 	  /*#                = 1 + i*diag(F(3,2) - F(1,0)) */
-	  tri[site].diag[0][i+Nc] -= rtmp_0;
+	  tri[site].diag[0][i+Nc] = -rtmp_0;
 	  
 	  /*# diag_L(i,1) = 1 + i*diag(E_z + B_z) */
 	  /*#             = 1 + i*diag(F(3,2) + F(1,0)) */
 	  ctmp_1 = f5.elem(site).elem().elem(i,i);
 	  ctmp_1 += f0.elem(site).elem().elem(i,i);
 	  rtmp_1 = imag(ctmp_1);
-	  tri[site].diag[1][i] -= rtmp_1;
+	  tri[site].diag[1][i] = -rtmp_1;
 	  
 	  /*# diag_L(i+Nc,1) = 1 - i*diag(E_z + B_z) */
 	  /*#                = 1 - i*diag(F(3,2) + F(1,0)) */
-	  tri[site].diag[1][i+Nc] += rtmp_1;
+	  tri[site].diag[1][i+Nc] = rtmp_1;
 	}
 	
 	/*# Construct lower triangular portion */
@@ -735,8 +731,53 @@ namespace Chroma
 	  }
 	}
 
-  exponentiate(tri[site], 0);
-      } /* End Site loop */
+    
+    /*
+    if(site == 10){
+        std::cout << "Before Exp:";
+        std::cout << "diag = ";
+        for(int ii = 0; ii < 2*Nc; ii++) 
+            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << std::endl;
+
+        std::cout << "offd = ";
+        for(int ii = 0; ii < 15; ii++) 
+            std::cout << "A.offd["<< ii << "] = complex " << tri[site].offd[0][ii] << std::endl;
+
+    exponentiate(tri[site], 0);
+
+        std::cout << "After Exp:";
+        std::cout << "diag = ";
+        for(int ii = 0; ii < 2*Nc; ii++) 
+            std::cout << tri[site].diag[0][ii] << ", ";
+        std::cout << std::endl;
+
+        std::cout << "offd = ";
+        for(int ii = 0; ii < 15; ii++) 
+            std::cout << tri[site].offd[0][ii] << ", ";
+        std::cout << std::endl;
+    }
+    */
+
+
+    // fix constants here 
+
+    exponentiate(tri[site], 0);
+
+
+    for(int jj = 0; jj < 2; jj++) {
+      for(int ii = 0; ii < 6; ii++) {
+        tri[site].diag[jj][ii] *= diag_mass.elem().elem().elem();
+      }
+    }
+    for(int jj = 0; jj < 2; jj++) {
+      for(int ii = 0; ii < 15; ii++) {
+        tri[site].offd[jj][ii] *= diag_mass.elem().elem().elem();
+      }
+    }
+
+
+  } /* End Site loop */
+
 #endif
     } /* Function */
   }
@@ -757,12 +798,12 @@ namespace Chroma
       QDP_abort(1);
     }
   
-    U f0 = f[0] * getCloverCoeff(0,1);
-    U f1 = f[1] * getCloverCoeff(0,2);
-    U f2 = f[2] * getCloverCoeff(0,3);
-    U f3 = f[3] * getCloverCoeff(1,2);
-    U f4 = f[4] * getCloverCoeff(1,3);
-    U f5 = f[5] * getCloverCoeff(2,3);    
+    U f0 = f[0] * getCloverCoeff(0,1) / diag_mass;
+    U f1 = f[1] * getCloverCoeff(0,2) / diag_mass;
+    U f2 = f[2] * getCloverCoeff(0,3) / diag_mass;
+    U f3 = f[3] * getCloverCoeff(1,2) / diag_mass;
+    U f4 = f[4] * getCloverCoeff(1,3) / diag_mass;
+    U f5 = f[5] * getCloverCoeff(2,3) / diag_mass;    
 
     const int nodeSites = QDP::Layout::sitesOnNode();
     QDPExpoCloverEnv::QDPCloverMakeClovArg<U> arg = {diag_mass, f0,f1,f2,f3,f4,f5,tri };
