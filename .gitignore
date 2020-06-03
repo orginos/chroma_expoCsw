@@ -3,6 +3,7 @@
 .deps
 .dirstamp
 .vscode/*
+*.out
 Makefile
 Makefile.in
 RUN

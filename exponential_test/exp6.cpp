@@ -6,7 +6,7 @@ const size_t Nc = 3;
 const size_t Noffd = 2*Nc*Nc-Nc;
 const size_t Ndiag = 2*Nc;
 
-const size_t Niter = 20;
+const size_t Niter = 25;
 
 // Same data layout as is in the chroma clover linop
 struct Triang6 {
@@ -164,6 +164,41 @@ int main(){
         A.diag[i] = 1.8 - i*0.1 - 1.55;    // this is just some test data...
     for (size_t i = 0; i < Noffd; i++)
         A.offd[i] = std::complex<double> { 1.2 - i*0.2, 1.2 - i*0.2 - 0.1 }; 
+
+
+A.diag[0] = 0.0582178;
+A.diag[1] = -0.0675741;
+A.diag[2] = 0.0161615;
+A.diag[3] = -0.0582178;
+A.diag[4] = 0.0675741;
+A.diag[5] = -0.0161615;
+A.offd[0] = std::complex<double> ( -0.0438132 , 0.0564889 );
+A.offd[1] = std::complex<double> ( 0.0317717 , -0.0186406 );
+A.offd[2] = std::complex<double> ( 0.0336684 , -0.028291 );
+A.offd[3] = std::complex<double> ( -0.0264951 , 0.0536321 );
+A.offd[4] = std::complex<double> ( -0.0776531 , 0.0864606 );
+A.offd[5] = std::complex<double> ( 0.0650558 , -0.0119279 );
+A.offd[6] = std::complex<double> ( -0.0126086 , 0.00982487 );
+A.offd[7] = std::complex<double> ( -0.0586652 , -0.0984199 );
+A.offd[8] = std::complex<double> ( 0.0306492 , -0.113321 );
+A.offd[9] = std::complex<double> ( 0.0438132 , -0.0564889 );
+A.offd[10] = std::complex<double> ( -0.0989423 , 0.00774407 );
+A.offd[11] = std::complex<double> ( 0.0426485 , 0.0128435 );
+A.offd[12] = std::complex<double> ( 0.0609364 , 0.00241003 );
+A.offd[13] = std::complex<double> ( -0.0317717 , 0.0186406 );
+A.offd[14] = std::complex<double> ( -0.0336684 , 0.028291 );
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Define A^2 and A^3
     tri6_mult(A2, A, A);

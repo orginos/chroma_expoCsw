@@ -732,38 +732,28 @@ namespace Chroma
 	}
 
     
-    /*
-    if(site == 10){
-        std::cout << "Before Exp:";
-        std::cout << "diag = ";
+    if(site == 0){
+        std::cout << "Before Exp:" << std::endl;
         for(int ii = 0; ii < 2*Nc; ii++) 
-            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << std::endl;
+            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << ";" <<std::endl;
 
-        std::cout << "offd = ";
         for(int ii = 0; ii < 15; ii++) 
-            std::cout << "A.offd["<< ii << "] = complex " << tri[site].offd[0][ii] << std::endl;
+            std::cout << "A.offd["<< ii << "] = std::complex<double> " << tri[site].offd[0][ii] << ";" <<std::endl;
+    }
 
     exponentiate(tri[site], 0);
 
-        std::cout << "After Exp:";
-        std::cout << "diag = ";
+    if(site == 0){
+        std::cout << "After Exp:" << std::endl;
         for(int ii = 0; ii < 2*Nc; ii++) 
-            std::cout << tri[site].diag[0][ii] << ", ";
-        std::cout << std::endl;
+            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << ";" <<std::endl;
 
-        std::cout << "offd = ";
         for(int ii = 0; ii < 15; ii++) 
-            std::cout << tri[site].offd[0][ii] << ", ";
-        std::cout << std::endl;
+            std::cout << "A.offd["<< ii << "] = std::complex<double> " << tri[site].offd[0][ii] << ";" <<std::endl;
     }
-    */
 
 
     // fix constants here 
-
-    exponentiate(tri[site], 0);
-
-
     for(int jj = 0; jj < 2; jj++) {
       for(int ii = 0; ii < 6; ii++) {
         tri[site].diag[jj][ii] *= diag_mass.elem().elem().elem();

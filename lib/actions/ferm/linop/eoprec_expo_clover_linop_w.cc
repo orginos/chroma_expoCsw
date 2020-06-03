@@ -149,19 +149,71 @@ namespace Chroma
     LatticeFermion tmp2; moveToFastMemoryHint(tmp2);
     Real mquarter = -0.25;
 
-
-    
-  
+/*    
+    std::cout << "psi" << std::endl;
+    for(int n = 0; n < 256; n++) {
+        for (int i = 0; i < Ns; i++){
+            for(int j = 0; j < Nc; j++){
+                if(psi.elem(n).elem(i).elem(j).real() != 0 || psi.elem(n).elem(i).elem(j).imag() != 0)
+                    std::cout << n << " " << i << " " << j << " " <<
+                    " ( " << psi.elem(n).elem(i).elem(j).real() << 
+                    " , " << psi.elem(n).elem(i).elem(j).imag() << 
+                    " )" << std::endl;
+            }
+        }
+    }
+*/    
+    //QDPIO::cout << "First Application:" << std::endl;
     //  tmp1_o  =  D_oe   A^(-1)_ee  D_eo  psi_o
     D.apply(tmp1, psi, isign, 0);
-
+/*
+    std::cout << "tmp1" << std::endl;
+    for(int n = 0; n < 256; n++) {
+        for (int i = 0; i < Ns; i++){
+            for(int j = 0; j < Nc; j++){
+                if(tmp1.elem(n).elem(i).elem(j).real() != 0 || tmp1.elem(n).elem(i).elem(j).imag() != 0)
+                    std::cout << n << " " << i << " " << j << " " <<
+                    " ( " << tmp1.elem(n).elem(i).elem(j).real() << 
+                    " , " << tmp1.elem(n).elem(i).elem(j).imag() << 
+                    " )" << std::endl;
+            }
+        }
+    }
+*/
     swatch.reset(); swatch.start();
     invclov.apply(tmp2, tmp1, isign, 0);
     swatch.stop();
     clov_apply_time += swatch.getTimeInSeconds();
-
+/*
+    std::cout << "tmp2" << std::endl;
+    for(int n = 0; n < 256; n++) {
+        for (int i = 0; i < Ns; i++){
+            for(int j = 0; j < Nc; j++){
+                if(tmp2.elem(n).elem(i).elem(j).real() != 0 || tmp2.elem(n).elem(i).elem(j).imag() != 0)
+                    std::cout << n << " " << i << " " << j << " " <<
+                    " ( " << tmp2.elem(n).elem(i).elem(j).real() << 
+                    " , " << tmp2.elem(n).elem(i).elem(j).imag() << 
+                    " )" << std::endl;
+            }
+        }
+    }
+*/
+    //QDPIO::cout << "Second Application:" << std::endl;
     D.apply(tmp1, tmp2, isign, 1);
-
+/*
+    std::cout << "tmp1" << std::endl;
+    for(int n = 0; n < 256; n++) {
+        for (int i = 0; i < Ns; i++){
+            for(int j = 0; j < Nc; j++){
+                if(tmp1.elem(n).elem(i).elem(j).real() != 0 || tmp1.elem(n).elem(i).elem(j).imag() != 0)
+                    std::cout << n << " " << i << " " << j << " " <<
+                    " ( " << tmp1.elem(n).elem(i).elem(j).real() << 
+                    " , " << tmp1.elem(n).elem(i).elem(j).imag() << 
+                    " )" << std::endl;
+            }
+        }
+    }
+*/
     //  chi_o  =  A_oo  psi_o  -  tmp1_o
     swatch.reset(); swatch.start();
     clov.apply(chi, psi, isign, 1);
@@ -169,7 +221,20 @@ namespace Chroma
     clov_apply_time += swatch.getTimeInSeconds();
 
     chi[rb[1]] += mquarter*tmp1;
-
+/*
+    std::cout << "chi" << std::endl;
+    for(int n = 0; n < 256; n++) {
+        for (int i = 0; i < Ns; i++){
+            for(int j = 0; j < Nc; j++){
+                if(chi.elem(n).elem(i).elem(j).real() != 0 || chi.elem(n).elem(i).elem(j).imag() != 0)
+                    std::cout << n << " " << i << " " << j << " " <<
+                    " ( " << chi.elem(n).elem(i).elem(j).real() << 
+                    " , " << chi.elem(n).elem(i).elem(j).imag() << 
+                    " )" << std::endl;
+            }
+        }
+    }
+*/
     // Twisted Term?
     if( param.twisted_m_usedP ){ 
       // tmp1 = i mu gamma_5 tmp1
