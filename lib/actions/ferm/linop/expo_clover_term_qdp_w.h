@@ -14,6 +14,8 @@
 #include <array>
 #include <iomanip>
 #include <complex>
+#include <array>
+
 namespace Chroma 
 { 
 
@@ -177,9 +179,10 @@ namespace Chroma
 
   template<typename R>
   void exponentiate(PrimitiveClovTriang<R>& A, int sign){
-    const int Niter = 25;
+    const int Niter = 17;
     PrimitiveClovTriang<R> A2, A3, tmp;
     for(size_t comp = 0; comp < 2; comp++){
+
       tri6_mult(A2, A, A, comp);
       tri6_mult(A3, A, A2, comp);
       
@@ -634,9 +637,15 @@ namespace Chroma
 
       // SITE LOOP STARTS HERE
       for(int site = lo; site < hi; ++site)  {
-	/*# Construct diagonal */
-	
-	
+	/*# Construct diagonal */       
+
+	for(int jj = 0; jj < 2; jj++) {
+	  
+	  for(int ii = 0; ii < 2*Nc; ii++) {
+	    
+	    tri[site].diag[jj][ii] = 0;
+	  }
+	}
 	
        
 
@@ -654,22 +663,22 @@ namespace Chroma
 	  ctmp_0 = f5.elem(site).elem().elem(i,i);
 	  ctmp_0 -= f0.elem(site).elem().elem(i,i);
 	  rtmp_0 = imag(ctmp_0);
-	  tri[site].diag[0][i] = rtmp_0;
+	  tri[site].diag[0][i] += rtmp_0;
 	  
 	  /*# diag_L(i+Nc,0) = 1 + i*diag(E_z - B_z) */
 	  /*#                = 1 + i*diag(F(3,2) - F(1,0)) */
-	  tri[site].diag[0][i+Nc] = -rtmp_0;
+	  tri[site].diag[0][i+Nc] -= rtmp_0;
 	  
 	  /*# diag_L(i,1) = 1 + i*diag(E_z + B_z) */
 	  /*#             = 1 + i*diag(F(3,2) + F(1,0)) */
 	  ctmp_1 = f5.elem(site).elem().elem(i,i);
 	  ctmp_1 += f0.elem(site).elem().elem(i,i);
 	  rtmp_1 = imag(ctmp_1);
-	  tri[site].diag[1][i] = -rtmp_1;
+	  tri[site].diag[1][i] -= rtmp_1;
 	  
 	  /*# diag_L(i+Nc,1) = 1 - i*diag(E_z + B_z) */
 	  /*#                = 1 - i*diag(F(3,2) + F(1,0)) */
-	  tri[site].diag[1][i+Nc] = rtmp_1;
+	  tri[site].diag[1][i+Nc] += rtmp_1;
 	}
 	
 	/*# Construct lower triangular portion */
@@ -730,26 +739,33 @@ namespace Chroma
 	    tri[site].offd[1][elem_ij] = E_minus + B_minus;
 	  }
 	}
-
     
-    if(site == 0){
+
+    // Print matrix at one site before exponentiation
+    std::array<std::string, 15> idx = 
+        {"0,1", "0,2", "0,3", "0,4", "0,5", "1,2", "1,3", "1,4", 
+         "1,5", "2,3", "2,4", "2,5", "3,4", "3,5", "4,5"};
+
+    if(site == 42){
         std::cout << "Before Exp:" << std::endl;
-        for(int ii = 0; ii < 2*Nc; ii++) 
-            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << ";" <<std::endl;
+        for(int ii = 0; ii < 6; ii++) 
+            std::cout << "A["<< ii << "," << ii <<  "] = " << tri[site].diag[1][ii] <<std::endl;
 
         for(int ii = 0; ii < 15; ii++) 
-            std::cout << "A.offd["<< ii << "] = std::complex<double> " << tri[site].offd[0][ii] << ";" <<std::endl;
+            std::cout << "A["<< idx[ii] << "] = complex" << tri[site].offd[1][ii] <<std::endl;
     }
 
+    // Apply exponential
     exponentiate(tri[site], 0);
 
-    if(site == 0){
+    // Print matrix at one site after exponentiation
+    if(site == 42){
         std::cout << "After Exp:" << std::endl;
-        for(int ii = 0; ii < 2*Nc; ii++) 
-            std::cout << "A.diag["<< ii << "] = " << tri[site].diag[0][ii] << ";" <<std::endl;
+        for(int ii = 0; ii < 6; ii++) 
+            std::cout << "A["<< ii << "," << ii <<  "] = " << tri[site].diag[1][ii] <<std::endl;
 
         for(int ii = 0; ii < 15; ii++) 
-            std::cout << "A.offd["<< ii << "] = std::complex<double> " << tri[site].offd[0][ii] << ";" <<std::endl;
+            std::cout << "A["<< idx[ii] << "] = complex" << tri[site].offd[1][ii] <<std::endl;
     }
 
 
@@ -794,6 +810,10 @@ namespace Chroma
     U f3 = f[3] * getCloverCoeff(1,2) / diag_mass;
     U f4 = f[4] * getCloverCoeff(1,3) / diag_mass;
     U f5 = f[5] * getCloverCoeff(2,3) / diag_mass;    
+
+    
+    QDPIO::cout << "cloverCoeff = " << getCloverCoeff(0,1) << std::endl;
+    QDPIO::cout << "diag_mass = " << diag_mass << std::endl;
 
     const int nodeSites = QDP::Layout::sitesOnNode();
     QDPExpoCloverEnv::QDPCloverMakeClovArg<U> arg = {diag_mass, f0,f1,f2,f3,f4,f5,tri };
