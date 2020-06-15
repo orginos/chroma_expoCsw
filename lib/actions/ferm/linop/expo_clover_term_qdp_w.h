@@ -42,116 +42,105 @@ namespace Chroma
     A.diag[i][0] = B.diag[i][0].elem()  * C.diag[i][0].elem()  
               + B.offd[i][0].real()  * C.offd[i][0].real()  + B.offd[i][0].imag()  * C.offd[i][0].imag()
               + B.offd[i][1].real()  * C.offd[i][1].real()  + B.offd[i][1].imag()  * C.offd[i][1].imag() 
-              + B.offd[i][2].real()  * C.offd[i][2].real()  + B.offd[i][2].imag()  * C.offd[i][2].imag() 
               + B.offd[i][3].real()  * C.offd[i][3].real()  + B.offd[i][3].imag()  * C.offd[i][3].imag() 
-              + B.offd[i][4].real()  * C.offd[i][4].real()  + B.offd[i][4].imag()  * C.offd[i][4].imag(); 
+              + B.offd[i][6].real()  * C.offd[i][6].real()  + B.offd[i][6].imag()  * C.offd[i][6].imag() 
+              + B.offd[i][10].real()  * C.offd[i][10].real()  + B.offd[i][10].imag()  * C.offd[i][10].imag(); 
 
     A.diag[i][1] = B.diag[i][1].elem()  * C.diag[i][1].elem()  
               + B.offd[i][0].real()  * C.offd[i][0].real()  + B.offd[i][0].imag()  * C.offd[i][0].imag()
-              + B.offd[i][5].real()  * C.offd[i][5].real()  + B.offd[i][5].imag()  * C.offd[i][5].imag() 
-              + B.offd[i][6].real()  * C.offd[i][6].real()  + B.offd[i][6].imag()  * C.offd[i][6].imag() 
+              + B.offd[i][2].real()  * C.offd[i][2].real()  + B.offd[i][2].imag()  * C.offd[i][2].imag() 
+              + B.offd[i][4].real()  * C.offd[i][4].real()  + B.offd[i][4].imag()  * C.offd[i][4].imag() 
               + B.offd[i][7].real()  * C.offd[i][7].real()  + B.offd[i][7].imag()  * C.offd[i][7].imag() 
-              + B.offd[i][8].real()  * C.offd[i][8].real()  + B.offd[i][8].imag()  * C.offd[i][8].imag(); 
+              + B.offd[i][11].real()  * C.offd[i][11].real()  + B.offd[i][11].imag()  * C.offd[i][11].imag(); 
 
     A.diag[i][2] = B.diag[i][2].elem()  * C.diag[i][2].elem()  
               + B.offd[i][1].real()  * C.offd[i][1].real()  + B.offd[i][1].imag()  * C.offd[i][1].imag()
+              + B.offd[i][2].real()  * C.offd[i][2].real()  + B.offd[i][2].imag()  * C.offd[i][2].imag() 
               + B.offd[i][5].real()  * C.offd[i][5].real()  + B.offd[i][5].imag()  * C.offd[i][5].imag() 
-              + B.offd[i][9].real()  * C.offd[i][9].real()  + B.offd[i][9].imag()  * C.offd[i][9].imag() 
-              + B.offd[i][10].real() * C.offd[i][10].real() + B.offd[i][10].imag() * C.offd[i][10].imag() 
-              + B.offd[i][11].real() * C.offd[i][11].real() + B.offd[i][11].imag() * C.offd[i][11].imag(); 
+              + B.offd[i][8].real() * C.offd[i][8].real() + B.offd[i][8].imag() * C.offd[i][8].imag() 
+              + B.offd[i][12].real() * C.offd[i][12].real() + B.offd[i][12].imag() * C.offd[i][12].imag(); 
 
     A.diag[i][3] = B.diag[i][3].elem()  * C.diag[i][3].elem()  
-              + B.offd[i][2].real()  * C.offd[i][2].real()  + B.offd[i][2].imag()  * C.offd[i][2].imag()
-              + B.offd[i][6].real()  * C.offd[i][6].real()  + B.offd[i][6].imag()  * C.offd[i][6].imag() 
-              + B.offd[i][9].real()  * C.offd[i][9].real()  + B.offd[i][9].imag()  * C.offd[i][9].imag() 
-              + B.offd[i][12].real() * C.offd[i][12].real() + B.offd[i][12].imag() * C.offd[i][12].imag() 
+              + B.offd[i][3].real()  * C.offd[i][3].real()  + B.offd[i][3].imag()  * C.offd[i][3].imag()
+              + B.offd[i][4].real()  * C.offd[i][4].real()  + B.offd[i][4].imag()  * C.offd[i][4].imag() 
+              + B.offd[i][5].real()  * C.offd[i][5].real()  + B.offd[i][5].imag()  * C.offd[i][5].imag() 
+              + B.offd[i][9].real() * C.offd[i][9].real() + B.offd[i][9].imag() * C.offd[i][9].imag() 
               + B.offd[i][13].real() * C.offd[i][13].real() + B.offd[i][13].imag() * C.offd[i][13].imag(); 
 
     A.diag[i][4] = B.diag[i][4].elem()  * C.diag[i][4].elem()  
-              + B.offd[i][3].real()  * C.offd[i][3].real()  + B.offd[i][3].imag()  * C.offd[i][3].imag()
+              + B.offd[i][6].real()  * C.offd[i][6].real()  + B.offd[i][6].imag()  * C.offd[i][6].imag()
               + B.offd[i][7].real()  * C.offd[i][7].real()  + B.offd[i][7].imag()  * C.offd[i][7].imag() 
-              + B.offd[i][10].real() * C.offd[i][10].real() + B.offd[i][10].imag() * C.offd[i][10].imag() 
-              + B.offd[i][12].real() * C.offd[i][12].real() + B.offd[i][12].imag() * C.offd[i][12].imag() 
+              + B.offd[i][8].real() * C.offd[i][8].real() + B.offd[i][8].imag() * C.offd[i][8].imag() 
+              + B.offd[i][9].real() * C.offd[i][9].real() + B.offd[i][9].imag() * C.offd[i][9].imag() 
               + B.offd[i][14].real() * C.offd[i][14].real() + B.offd[i][14].imag() * C.offd[i][14].imag(); 
 
     A.diag[i][5] = B.diag[i][5].elem()  * C.diag[i][5].elem()  
-              + B.offd[i][4].real()  * C.offd[i][4].real()  + B.offd[i][4].imag()  * C.offd[i][4].imag()
-              + B.offd[i][8].real()  * C.offd[i][8].real()  + B.offd[i][8].imag()  * C.offd[i][8].imag() 
-              + B.offd[i][11].real() * C.offd[i][11].real() + B.offd[i][11].imag() * C.offd[i][11].imag() 
+              + B.offd[i][10].real()  * C.offd[i][10].real()  + B.offd[i][10].imag()  * C.offd[i][10].imag()
+              + B.offd[i][11].real()  * C.offd[i][11].real()  + B.offd[i][11].imag()  * C.offd[i][11].imag() 
+              + B.offd[i][12].real() * C.offd[i][12].real() + B.offd[i][12].imag() * C.offd[i][12].imag() 
               + B.offd[i][13].real() * C.offd[i][13].real() + B.offd[i][13].imag() * C.offd[i][13].imag() 
               + B.offd[i][14].real() * C.offd[i][14].real() + B.offd[i][14].imag() * C.offd[i][14].imag();                 
 
     // Off-diagonal Terms:
     A.offd[i][0] = B.diag[i][0]  * C.offd[i][0]  + B.offd[i][0]  * C.diag[i][1]
-              + B.offd[i][1]  * conj(C.offd[i][5])  + B.offd[i][2]  * conj(C.offd[i][6])
-              + B.offd[i][3]  * conj(C.offd[i][7])  + B.offd[i][4]  * conj(C.offd[i][8]); 
+              + B.offd[i][1]  * conj(C.offd[i][2])  + B.offd[i][3]  * conj(C.offd[i][4])
+              + B.offd[i][6]  * conj(C.offd[i][7])  + B.offd[i][10]  * conj(C.offd[i][11]); 
 
-    A.offd[i][1] = B.diag[i][0]  * C.offd[i][1]  + B.offd[i][0]  * C.offd[i][5]
-              + B.offd[i][1]  * C.diag[i][2]  + B.offd[i][2]  * conj(C.offd[i][9])
-              + B.offd[i][3]  * conj(C.offd[i][10]) + B.offd[i][4]  * conj(C.offd[i][11]); 
+    A.offd[i][1] = B.diag[i][0]  * C.offd[i][1]  + B.offd[i][0]  * C.offd[i][2]
+              + B.offd[i][1]  * C.diag[i][2]  + B.offd[i][3]  * conj(C.offd[i][5])
+              + B.offd[i][6]  * conj(C.offd[i][8]) + B.offd[i][10]  * conj(C.offd[i][12]); 
 
-    A.offd[i][2] = B.diag[i][0]  * C.offd[i][2]  + B.offd[i][0]  * C.offd[i][6]
-              + B.offd[i][1]  * C.offd[i][9]  + B.offd[i][2]  * C.diag[i][3]
-              + B.offd[i][3]  * conj(C.offd[i][12]) + B.offd[i][4]  * conj(C.offd[i][13]); 
+    A.offd[i][2] = conj(B.offd[i][0])  * C.offd[i][1]  + B.diag[i][1]  * C.offd[i][2]
+              + B.offd[i][2]  * C.diag[i][2]  + B.offd[i][4]  * conj(C.offd[i][5])
+              + B.offd[i][7]  * conj(C.offd[i][8]) + B.offd[i][11]  * conj(C.offd[i][12]);   
 
-    A.offd[i][3] = B.diag[i][0]  * C.offd[i][3]  + B.offd[i][0]  * C.offd[i][7]
-              + B.offd[i][1]  * C.offd[i][10] + B.offd[i][2]  * C.offd[i][12]
-              + B.offd[i][3]  * C.diag[i][4]  + B.offd[i][4]  * conj(C.offd[i][14]); 
+    A.offd[i][3] = B.diag[i][0]  * C.offd[i][3]  + B.offd[i][0]  * C.offd[i][4]
+              + B.offd[i][1]  * C.offd[i][5]  + B.offd[i][3]  * C.diag[i][3]
+              + B.offd[i][6]  * conj(C.offd[i][9]) + B.offd[i][10]  * conj(C.offd[i][13]); 
 
-    A.offd[i][4] = B.diag[i][0]  * C.offd[i][4]  + B.offd[i][0]  * C.offd[i][8]
-              + B.offd[i][1]  * C.offd[i][11] + B.offd[i][2]  * C.offd[i][13]
-              + B.offd[i][3]  * C.offd[i][14] + B.offd[i][4]  * C.diag[i][5];      
+    A.offd[i][4] = conj(B.offd[i][0])  * C.offd[i][3]  + B.diag[i][1]  * C.offd[i][4]
+              + B.offd[i][2]  * C.offd[i][5]  + B.offd[i][4]  * C.diag[i][3]
+              + B.offd[i][7]  * conj(C.offd[i][9]) + B.offd[i][11]  * conj(C.offd[i][13]);   
 
+    A.offd[i][5]  = conj(B.offd[i][1])  * C.offd[i][3]  + conj(B.offd[i][2])  * C.offd[i][4]
+              + B.diag[i][2]  * C.offd[i][5]  + B.offd[i][5]  * C.diag[i][3]
+              + B.offd[i][8] * conj(C.offd[i][9]) + B.offd[i][12] * conj(C.offd[i][13]);   
 
+    A.offd[i][6] = B.diag[i][0]  * C.offd[i][6]  + B.offd[i][0]  * C.offd[i][7]
+              + B.offd[i][1]  * C.offd[i][8] + B.offd[i][3]  * C.offd[i][9]
+              + B.offd[i][6]  * C.diag[i][4]  + B.offd[i][10]  * conj(C.offd[i][14]); 
 
+    A.offd[i][7] = conj(B.offd[i][0])  * C.offd[i][6]  + B.diag[i][1]  * C.offd[i][7]
+              + B.offd[i][2]  * C.offd[i][8] + B.offd[i][4]  * C.offd[i][9]
+              + B.offd[i][7]  * C.diag[i][4]  + B.offd[i][11]  * conj(C.offd[i][14]);   
 
-    A.offd[i][5] = conj(B.offd[i][0])  * C.offd[i][1]  + B.diag[i][1]  * C.offd[i][5]
-              + B.offd[i][5]  * C.diag[i][2]  + B.offd[i][6]  * conj(C.offd[i][9])
-              + B.offd[i][7]  * conj(C.offd[i][10]) + B.offd[i][8]  * conj(C.offd[i][11]);   
+    A.offd[i][8] = conj(B.offd[i][1])  * C.offd[i][6]  + conj(B.offd[i][2])  * C.offd[i][7]
+              + B.diag[i][2]  * C.offd[i][8] + B.offd[i][5]  * C.offd[i][9]
+              + B.offd[i][8] * C.diag[i][4]  + B.offd[i][12] * conj(C.offd[i][14]);   
 
-    A.offd[i][6] = conj(B.offd[i][0])  * C.offd[i][2]  + B.diag[i][1]  * C.offd[i][6]
-              + B.offd[i][5]  * C.offd[i][9]  + B.offd[i][6]  * C.diag[i][3]
-              + B.offd[i][7]  * conj(C.offd[i][12]) + B.offd[i][8]  * conj(C.offd[i][13]);   
+    A.offd[i][9] = conj(B.offd[i][3])  * C.offd[i][6]  + conj(B.offd[i][4])  * C.offd[i][7]
+              + conj(B.offd[i][5])  * C.offd[i][8] + B.diag[i][3]  * C.offd[i][9]
+              + B.offd[i][9] * C.diag[i][4]  + B.offd[i][13] * conj(C.offd[i][14]);   
 
-    A.offd[i][7] = conj(B.offd[i][0])  * C.offd[i][3]  + B.diag[i][1]  * C.offd[i][7]
-              + B.offd[i][5]  * C.offd[i][10] + B.offd[i][6]  * C.offd[i][12]
-              + B.offd[i][7]  * C.diag[i][4]  + B.offd[i][8]  * conj(C.offd[i][14]);   
+    A.offd[i][10] = B.diag[i][0]  * C.offd[i][10]  + B.offd[i][0]  * C.offd[i][11]
+              + B.offd[i][1]  * C.offd[i][12] + B.offd[i][3]  * C.offd[i][13]
+              + B.offd[i][6]  * C.offd[i][14] + B.offd[i][10]  * C.diag[i][5];      
 
-    A.offd[i][8] = conj(B.offd[i][0])  * C.offd[i][4]  + B.diag[i][1]  * C.offd[i][8]
-              + B.offd[i][5]  * C.offd[i][11] + B.offd[i][6]  * C.offd[i][13]
-              + B.offd[i][7]  * C.offd[i][14] + B.offd[i][8]  * C.diag[i][5];      
-
-
-
-
-    A.offd[i][9]  = conj(B.offd[i][1])  * C.offd[i][2]  + conj(B.offd[i][5])  * C.offd[i][6]
-              + B.diag[i][2]  * C.offd[i][9]  + B.offd[i][9]  * C.diag[i][3]
-              + B.offd[i][10] * conj(C.offd[i][12]) + B.offd[i][11] * conj(C.offd[i][13]);   
-
-    A.offd[i][10] = conj(B.offd[i][1])  * C.offd[i][3]  + conj(B.offd[i][5])  * C.offd[i][7]
-              + B.diag[i][2]  * C.offd[i][10] + B.offd[i][9]  * C.offd[i][12]
-              + B.offd[i][10] * C.diag[i][4]  + B.offd[i][11] * conj(C.offd[i][14]);   
-
-    A.offd[i][11] = conj(B.offd[i][1])  * C.offd[i][4]  + conj(B.offd[i][5])  * C.offd[i][8]
-              + B.diag[i][2]  * C.offd[i][11] + B.offd[i][9]  * C.offd[i][13]
-              + B.offd[i][10] * C.offd[i][14] + B.offd[i][11] * C.diag[i][5];    
+    A.offd[i][11] = conj(B.offd[i][0])  * C.offd[i][10]  + B.diag[i][1]  * C.offd[i][11]
+              + B.offd[i][2]  * C.offd[i][12] + B.offd[i][4]  * C.offd[i][13]
+              + B.offd[i][7]  * C.offd[i][14] + B.offd[i][11]  * C.diag[i][5];      
 
 
+    A.offd[i][12] = conj(B.offd[i][1])  * C.offd[i][10]  + conj(B.offd[i][2])  * C.offd[i][11]
+              + B.diag[i][2]  * C.offd[i][12] + B.offd[i][5]  * C.offd[i][13]
+              + B.offd[i][8] * C.offd[i][14] + B.offd[i][12] * C.diag[i][5];    
 
+    A.offd[i][13] = conj(B.offd[i][3])  * C.offd[i][10]  + conj(B.offd[i][4])  * C.offd[i][11]
+              + conj(B.offd[i][5])  * C.offd[i][12] + B.diag[i][3]  * C.offd[i][13]
+              + B.offd[i][9] * C.offd[i][14] + B.offd[i][13] * C.diag[i][5];   
 
-    A.offd[i][12] = conj(B.offd[i][2])  * C.offd[i][3]  + conj(B.offd[i][6])  * C.offd[i][7]
-              + conj(B.offd[i][9])  * C.offd[i][10] + B.diag[i][3]  * C.offd[i][12]
-              + B.offd[i][12] * C.diag[i][4]  + B.offd[i][13] * conj(C.offd[i][14]);   
-
-    A.offd[i][13] = conj(B.offd[i][2])  * C.offd[i][4]  + conj(B.offd[i][6])  * C.offd[i][8]
-              + conj(B.offd[i][9])  * C.offd[i][11] + B.diag[i][3]  * C.offd[i][13]
-              + B.offd[i][12] * C.offd[i][14] + B.offd[i][13] * C.diag[i][5];   
-
-
-
-
-    A.offd[i][14] = conj(B.offd[i][3])  * C.offd[i][4]  + conj(B.offd[i][7])  * C.offd[i][8]
-              + conj(B.offd[i][10]) * C.offd[i][11] + conj(B.offd[i][12]) * C.offd[i][13]
+    A.offd[i][14] = conj(B.offd[i][6])  * C.offd[i][10]  + conj(B.offd[i][7])  * C.offd[i][11]
+              + conj(B.offd[i][8]) * C.offd[i][12] + conj(B.offd[i][9]) * C.offd[i][13]
               + B.diag[i][4]  * C.offd[i][14] + B.offd[i][14] * C.diag[i][5];    
   
   } 
@@ -686,10 +675,10 @@ namespace Chroma
 	for(int i = 1; i < Nc; ++i) {
 	  
 	  for(int j = 0; j < i; ++j) {
-	    
-	    int elem_ij  = i*(i-1)/2 + j;
+
+        int elem_ij  = i*(i-1)/2 + j;
 	    int elem_tmp = (i+Nc)*(i+Nc-1)/2 + j+Nc;
-	    
+
 	    /*# L(i,j,0) = -i*(E_z - B_z)[i,j] */
 	    /*#          = -i*(F(3,2) - F(1,0)) */
 	    ctmp_0 = f0.elem(site).elem().elem(i,j);
@@ -720,7 +709,7 @@ namespace Chroma
 	    // Flipped index
 	    // by swapping i <-> j. In the past i would run slow
 	    // and now j runs slow
-	    int elem_ij  = (i+Nc)*(i+Nc-1)/2 + j;
+        int elem_ij  = (i+Nc)*(i+Nc-1)/2 + j;
 	    
 	    /*# i*E_- = (i*E_x + E_y) */
 	    /*#       = (i*F(3,0) + F(3,1)) */
@@ -740,34 +729,8 @@ namespace Chroma
 	  }
 	}
     
-
-    // Print matrix at one site before exponentiation
-    std::array<std::string, 15> idx = 
-        {"0,1", "0,2", "0,3", "0,4", "0,5", "1,2", "1,3", "1,4", 
-         "1,5", "2,3", "2,4", "2,5", "3,4", "3,5", "4,5"};
-
-    if(site == 42){
-        std::cout << "Before Exp:" << std::endl;
-        for(int ii = 0; ii < 6; ii++) 
-            std::cout << "A["<< ii << "," << ii <<  "] = " << tri[site].diag[1][ii] <<std::endl;
-
-        for(int ii = 0; ii < 15; ii++) 
-            std::cout << "A["<< idx[ii] << "] = complex" << tri[site].offd[1][ii] <<std::endl;
-    }
-
     // Apply exponential
     exponentiate(tri[site], 0);
-
-    // Print matrix at one site after exponentiation
-    if(site == 42){
-        std::cout << "After Exp:" << std::endl;
-        for(int ii = 0; ii < 6; ii++) 
-            std::cout << "A["<< ii << "," << ii <<  "] = " << tri[site].diag[1][ii] <<std::endl;
-
-        for(int ii = 0; ii < 15; ii++) 
-            std::cout << "A["<< idx[ii] << "] = complex" << tri[site].offd[1][ii] <<std::endl;
-    }
-
 
     // fix constants here 
     for(int jj = 0; jj < 2; jj++) {
